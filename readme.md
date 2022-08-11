@@ -14,3 +14,5 @@ ENABLE_DEBUG_TOOLBAR=False
 ```
 
 настройка `ENABLE_DEBUG_TOOLBAR=True` замедляет выполнение `bulk_create`
+
+![image](https://user-images.githubusercontent.com/18235953/184236668-5b156830-2685-4be8-851e-674d6b581b9d.png)

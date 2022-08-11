@@ -1,0 +1,47 @@
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'csv_parser/_include-headers.html' %}
+</head>
+<body>
+{% include 'csv_parser/_include-navbar.html' with active_page=0 %}
+<div class="container">
+
+    {% if uploaded_pk %}
+        <div class="alert alert-success" role="alert">
+            CSV успешно загружен
+            <a href="{% url 'detail-csv' uploaded_pk %}">посмотреть</a>
+        </div>
+    {% endif %}
+    {% if uploading_error %}
+        <div class="alert alert-danger" role="alert">
+            Ошибка загрузки CSV {{ uploading_error }}
+        </div>
+    {% endif %}
+
+    <h1>Загрузка CSV</h1>
+    {% if form.is_multipart %}
+        <form enctype="multipart/form-data" action='{% url 'csv-form' %}' method="POST">
+    {% else %}
+        <form action='{% url 'csv-form' %}' method="POST">
+    {% endif %}
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+    {% if form.errors %}
+        <style>
+            .help-block {
+                color: red;
+            }
+        </style>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

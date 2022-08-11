@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List csv</title>
+    {% include 'csv_parser/_include-headers.html' %}
+</head>
+<body>
+{% include 'csv_parser/_include-navbar.html' with active_page=1 %}
+<div class="container">
+    {% for csv in csvs %}
+        <ul class="list-group">
+            <li class="list-group-item">
+                {{ csv.file_name | default_if_none:'' }}
+                {{ csv.url | default_if_none:'' }}
+                <p>{{ csv.created_at }}</p>
+                <a href="{{ csv.get_detailed_url }}">
+                    <p>открыть</p>
+                </a>
+            </li>
+
+        </ul>
+    {% endfor %}
+</div>
+
+</body>
+</html>
